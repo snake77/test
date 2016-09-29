@@ -1,0 +1,106 @@
+/*
+Create a script that compares two sorted arrays of variable length. Return all elements that appear in both arrays.
+
+Objectives:
+- Create a function that takes two arrays of ints
+- Return an array containing all the elements that appear in both arrays
+- The return array must be deduplicated
+- DO NOT use any builtin array helpers such as array intersect
+- If there are no matching elements return an empty array
+
+Example Input JSON:
+
+  ```json
+  {
+    "a":[1,2,2,3,4,5,5,5,5,5,6,7,8,9,10,11,12],
+    "b":[7,7,7,7,7,8,9]
+  }
+```
+
+Example Output JSON:
+
+  ```json
+  [7,8,9]
+```
+*/
+
+var arr1 = [1,2,2,3,4,5,5,5,5,5,6,7,8,9,10,11,12,25,100],
+    arr2 = [7,7,7,7,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
+
+function compareArray ( a, b){
+    var len,
+        i,
+        temNum,
+        c = [];
+
+    for(i = 0; i < a.length; i++){
+        for (j = 0; j < b.length; j++){
+            //if (a[i] === b[j] && !checkDuplicate(c, b[j]) ){
+            if (a[i] === b[j] &&  a[i] !== tempNum ){
+                tempNum = a[i];
+                c.push(b[j]);
+
+            }
+        }
+        tempNum = '';
+    }
+    return c;
+
+}
+
+
+
+function compareArray2 ( a, b){
+    var len,
+        i,
+        temNum,
+        aPos = 0,
+        bPos = 0,
+        c = [];
+
+    if(a.length > b.length){
+        len = a.length;
+    } else {
+        len = b.length;
+    }
+
+    for(i = 0; i <len; i++){
+        if(a[aPos] > b[bPos]){
+              bPos++;
+        }   else {
+            aPos++;
+        }
+
+        if (a[aPos] === b[bPos] &&  a[aPos] !== tempNum ){
+            tempNum = a[aPos];
+            c.push(b[bPos]);
+        }
+
+        tempNum = '';
+    }
+    return c;
+
+}
+
+/*
+function checkDuplicate(arr, num){
+    var i;
+    for (i=0; i<arr.length; i++){
+        if(arr[i] === num){
+            return false;
+        }
+
+    }
+
+    return true;
+}
+*/
+var result = compareArray(arr1, arr2);
+for(var i in result){
+    print(result[i]);
+}
+
+var result2 = compareArray2(arr1, arr2);
+for(var i in result){
+    print(result[i]);
+}
